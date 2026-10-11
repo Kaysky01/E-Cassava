@@ -88,7 +88,7 @@ class EcassavaUpgradeTest extends TestCase
         $this->assertDatabaseHas('devices', ['device_id' => 'ECASSAVA-090', 'user_id' => $userB->id]);
     }
 
-    public function test_device_creation_generates_id_and_api_key(): void
+    public function test_device_creation_uses_name_as_device_id(): void
     {
         $user = User::factory()->create();
 
@@ -102,13 +102,27 @@ class EcassavaUpgradeTest extends TestCase
 
         $device = Device::where('user_id', $user->id)->first();
         $this->assertNotNull($device);
-        $this->assertMatchesRegularExpression('/^ECASSAVA-\d{3}$/', $device->device_id);
+        $this->assertSame('Gudang Wetan', $device->device_id);
+        $this->assertSame('Gudang Wetan', $device->name);
         $this->assertNotNull($device->api_key);
         $this->assertGreaterThanOrEqual(32, strlen((string) $response->getSession()->get('api_plain_key')));
         $this->assertTrue($device->verifyApiKey((string) $response->getSession()->get('api_plain_key')));
 
         // Modal snippet tampil di halaman index (key sekali tampil).
         $this->actingAs($user)->get('/devices')->assertStatus(200)->assertSee($device->device_id);
+    }
+
+    public function test_device_creation_rejects_duplicate_name(): void
+    {
+        $user = User::factory()->create();
+        Device::factory()->for($user)->create(['device_id' => 'Gudang Wetan', 'name' => 'Gudang Wetan']);
+
+        $response = $this->actingAs($user)->post('/devices', [
+            'name' => 'Gudang Wetan',
+        ]);
+
+        $response->assertSessionHasErrors('name');
+        $this->assertSame(1, Device::where('user_id', $user->id)->count());
     }
 
     public function test_sensor_data_requires_api_key_when_device_has_one(): void

@@ -33,7 +33,9 @@ class DeviceController extends Controller
     {
         $validated = $request->validated();
 
-        $deviceId = $this->generateDeviceId();
+        // device_id ngikutin nama alat (unik, sudah divalidasi di request)
+        // supaya sama persis dengan DEVICE_ID yang dikirim firmware ESP32.
+        $deviceId = trim($validated['name']);
         $plainKey = Str::random(48);
 
         $device = Device::create([
@@ -109,15 +111,5 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')
             ->with('success', __('devices.updated_ok'));
-    }
-
-    private function generateDeviceId(): string
-    {
-        do {
-            $number = str_pad((string) random_int(1, 999), 3, '0', STR_PAD_LEFT);
-            $candidate = 'ECASSAVA-'.$number;
-        } while (Device::where('device_id', $candidate)->exists());
-
-        return $candidate;
     }
 }

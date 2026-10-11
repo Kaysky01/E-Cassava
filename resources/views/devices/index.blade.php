@@ -2,7 +2,7 @@
 @section('title', __('devices.title'))
 
 @section('content')
-<div class="space-y-6" x-data="{ showAdd: false, copied: false }">
+<div class="space-y-6" x-data="{ showAdd: {{ $errors->any() ? 'true' : 'false' }}, copied: false }">
 
     <div class="card card-hover relative overflow-hidden p-6 sm:p-7">
         <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cassava-100 blur-3xl"></div>
@@ -97,7 +97,11 @@
                 @csrf
                 <div>
                     <label for="dev-name" class="label-shell">{{ __('devices.name') }}</label>
-                    <input id="dev-name" name="name" required maxlength="100" class="input-shell" placeholder="{{ __('devices.name_ph') }}" />
+                    <input id="dev-name" name="name" required maxlength="50" value="{{ old('name') }}" class="input-shell" placeholder="{{ __('devices.name_ph') }}" />
+                    <p class="mt-1 text-xs text-gray-500">{{ __('devices.name_hint') }}</p>
+                    @error('name')
+                        <p class="mt-1 text-xs font-semibold text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <label for="dev-loc" class="label-shell">{{ __('devices.location') }}</label>
