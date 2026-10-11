@@ -1,0 +1,13 @@
+# Model files (dilatih secara lokal, jangan commit)
+models/ecassava_model.joblib
+models/model_meta.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Training data exports
+*.csv
