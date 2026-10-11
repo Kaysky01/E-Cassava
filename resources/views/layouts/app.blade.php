@@ -81,6 +81,7 @@
                         <div class="border-b border-gray-100 px-4 py-3">
                             <p class="truncate text-sm font-bold">{{ auth()->user()?->name }}</p>
                             <p class="truncate text-xs text-gray-500">{{ auth()->user()?->email }}</p>
+                            <p class="mt-1 inline-block rounded-md bg-gray-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-gray-600">ID: {{ auth()->id() }}</p>
                         </div>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
