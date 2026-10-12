@@ -8,7 +8,6 @@ return [
     'nav_demo' => 'Demo',
     'nav_dashboard' => 'Dashboard',
     'nav_devices' => 'Devices',
-    'nav_sessions' => 'Test Sessions',
     'nav_ml' => 'ML Prediction',
     'nav_alerts' => 'Notifications',
     'login' => 'Log in',

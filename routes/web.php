@@ -11,7 +11,6 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MlPredictionController;
-use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -39,20 +38,10 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/dashboard/api/overview', [DashboardApiController::class, 'overview'])->name('dashboard.api.overview');
     Route::get('/dashboard/api/sensor', [DashboardApiController::class, 'sensor'])->name('dashboard.api.sensor');
 
-    // ── Sesi Pengujian (Data Collection & Labeling) ──────────────
-    Route::prefix('sessions')->name('sessions.')->group(function (): void {
-        Route::get('/', [SessionController::class, 'index'])->name('index');
-        Route::post('/', [SessionController::class, 'store'])->name('store');
-        Route::get('/export-csv', [SessionController::class, 'exportCsv'])->name('export-csv');
-        Route::get('/{session}', [SessionController::class, 'show'])->name('show');
-        Route::patch('/{session}/end', [SessionController::class, 'end'])->name('end');
-    });
-
     // ── Machine Learning Prediction ───────────────────────────────
     Route::prefix('ml')->name('ml.')->group(function (): void {
         Route::get('/', [MlPredictionController::class, 'index'])->name('index');
         Route::post('/predict', [MlPredictionController::class, 'predict'])->name('predict');
-        Route::post('/predict-session/{session}', [MlPredictionController::class, 'predictSession'])->name('predict-session');
         Route::get('/health', [MlPredictionController::class, 'healthCheck'])->name('health');
     });
 

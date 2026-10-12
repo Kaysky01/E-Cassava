@@ -128,7 +128,7 @@
                     <p class="text-[13px] leading-relaxed">Model SVM aktif dan siap digunakan. Klasifikasi berjalan otomatis setiap ada data sensor baru (window {{ $windowSize }}). Cek <code class="rounded bg-sky-100 px-1.5 py-0.5 font-mono text-[11px]">/ml/health</code> untuk detail versi model.</p>
                 @else
                     <p class="text-[13px] leading-relaxed">Model belum tersedia. Data sensor tetap tersimpan; klasifikasi otomatis dilanjutkan setelah service pulih. Anda perlu:<br/>
-                    1. Mengumpulkan data training (halaman Sesi Uji)<br/>
+                    1. Mengumpulkan data training sensor<br/>
                     2. Melatih model SVM di Python (<code class="rounded bg-sky-100 px-1.5 py-0.5 font-mono text-[11px]">ml/train.py</code>)<br/>
                     3. Menjalankan Python API service</p>
                 @endif

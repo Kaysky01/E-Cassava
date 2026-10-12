@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Jobs\ClassifySensorWindowJob;
 use App\Models\Alert;
 use App\Models\Device;
-use App\Models\MeasurementSession;
 use App\Models\SensorReading;
 use App\Models\User;
 use App\Services\AlertService;
@@ -48,7 +47,6 @@ class EcassavaUpgradeTest extends TestCase
     {
         $this->get('/dashboard')->assertRedirect(route('login'));
         $this->get('/devices')->assertRedirect(route('login'));
-        $this->get('/sessions')->assertRedirect(route('login'));
         $this->get('/ml')->assertRedirect(route('login'));
         $this->get('/alerts')->assertRedirect(route('login'));
     }
@@ -59,12 +57,6 @@ class EcassavaUpgradeTest extends TestCase
         $userB = User::factory()->create();
 
         $deviceB = Device::factory()->for($userB)->create(['device_id' => 'ECASSAVA-090']);
-        $sessionB = MeasurementSession::create([
-            'device_id' => $deviceB->id,
-            'name' => 'Milik B',
-            'cassava_condition' => 'fresh',
-            'started_at' => now()->subHour(),
-        ]);
 
         // Device milik B: A ditolak (403, policy).
         $this->actingAs($userA)->get("/devices/{$deviceB->id}/edit")->assertForbidden();
@@ -72,10 +64,6 @@ class EcassavaUpgradeTest extends TestCase
             'name' => 'Coba ambil',
         ])->assertForbidden();
         $this->actingAs($userA)->delete("/devices/{$deviceB->id}")->assertForbidden();
-
-        // Sesi milik B tidak bisa dibuka/diakhiri A.
-        $this->actingAs($userA)->get("/sessions/{$sessionB->id}")->assertForbidden();
-        $this->actingAs($userA)->patch("/sessions/{$sessionB->id}/end")->assertForbidden();
 
         // Prediksi manual untuk device B via A → 404.
         $this->actingAs($userA)->postJson('/ml/predict', ['device_id' => 'ECASSAVA-090'])

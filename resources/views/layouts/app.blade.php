@@ -5,7 +5,6 @@
     $nav = [
         ['route' => 'dashboard', 'label' => __('app.nav_dashboard'), 'pattern' => 'dashboard'],
         ['route' => 'devices.index', 'label' => __('app.nav_devices'), 'pattern' => 'devices.*'],
-        ['route' => 'sessions.index', 'label' => __('app.nav_sessions'), 'pattern' => 'sessions.*'],
         ['route' => 'ml.index', 'label' => __('app.nav_ml'), 'pattern' => 'ml.*'],
     ];
 @endphp
