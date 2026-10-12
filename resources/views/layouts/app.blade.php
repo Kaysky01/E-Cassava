@@ -31,12 +31,7 @@
     @stack('head')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
-<body class="flex min-h-screen flex-col bg-[#f6f4ec] font-sans text-gray-800 antialiased">
-    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <div class="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-cassava-200/40 blur-3xl"></div>
-        <div class="absolute top-10 -right-24 h-80 w-80 rounded-full bg-emerald-100/50 blur-3xl"></div>
-    </div>
-
+<body class="flex min-h-screen flex-col bg-white font-sans text-gray-800 antialiased">
     {{-- Navbar pil mengambang --}}
     <div class="sticky top-3 z-50 mx-auto w-[calc(100%-1.5rem)] max-w-7xl" x-data="{ menu: false }">
         <header class="flex items-center justify-between gap-2 rounded-full bg-white/95 py-2 pl-3 pr-2 shadow-[0_10px_36px_-12px_rgba(30,58,26,0.35)] ring-1 ring-black/5 backdrop-blur sm:pl-4">

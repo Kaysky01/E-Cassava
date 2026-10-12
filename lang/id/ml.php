@@ -2,11 +2,11 @@
 
 return [
     'title' => 'Prediksi ML',
-    'subtitle' => 'Analisis kondisi singkong secara real-time dari data sensor.',
+    'subtitle' => 'Analisis kondisi singkong secara real-time dari data sensor volatilome.',
     'eyebrow' => 'Machine Learning',
     'manual' => 'Prediksi manual',
     'manual_title' => 'Prediksi Real-Time dari Sensor',
-    'manual_sub' => 'Menggunakan :n pembacaan terakhir sebagai input.',
+    'manual_sub' => 'Menggunakan :n pembacaan terakhir sebagai input window sliding.',
     'choose_device' => 'Pilih Perangkat',
     'predict_now' => 'Prediksi sekarang',
     'analyze' => 'Analisis Sekarang',

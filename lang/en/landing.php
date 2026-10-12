@@ -106,7 +106,7 @@ return [
     'footer_l3' => 'API Documentation',
     'footer_l4' => 'Sensor Network Status',
     'footer_consortium' => 'Agronomy Consortium',
-    'footer_consortium_desc' => 'Developed to improve sustainable local food quality through micro-biochemical sensing and applied machine learning.',
+    'footer_consortium_desc' => 'Developed to improve sustainable local food quality through micro-biochemical sensing and state-of-the-art machine learning.',
     'footer_sensor_badge' => 'Sensor Array Active & Calibrated',
     'footer_privacy' => 'Privacy Policy',
     'footer_terms' => 'Terms of Service',

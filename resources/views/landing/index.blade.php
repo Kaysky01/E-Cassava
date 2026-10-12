@@ -85,7 +85,7 @@
         <div class="flex flex-col items-stretch gap-3 rounded-[24px] bg-white px-5 py-4 shadow-[0_18px_50px_-16px_rgba(30,58,26,0.35)] ring-1 ring-black/5 sm:flex-row sm:items-center sm:gap-0 sm:rounded-full sm:py-2.5 sm:pl-6 sm:pr-2.5">
             <div class="flex flex-1 items-center gap-3 sm:px-2">
                 <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e9f1dc] text-[#2f5d2a]">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" /><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7" /><path d="M6 6a8.5 8.5 0 0 0 0 12M18 6a8.5 8.5 0 0 1 0 12" /></svg>
                 </span>
                 <span><span class="block text-[12.5px] font-extrabold leading-tight text-[#1e3a1a]">{{ __('landing.fb_1_t') }}</span><span class="block text-[11px] text-gray-400">{{ __('landing.fb_1_d') }}</span></span>
             </div>
@@ -111,7 +111,7 @@
         </div>
         <div class="mt-8 grid gap-4 md:grid-cols-3">
             @foreach ([
-                ['icon' => '<path d="M6 2h12M6 22h12M8 2v6l-3 7a5 5 0 0 0 10 0l-3-7V2" />', 't' => __('landing.problem_1_title'), 'd' => __('landing.problem_1_desc'), 'f' => __('landing.problem_1_tag')],
+                ['icon' => '<path d="M7 2h10M7 22h10M8 2v4.5L12 11l4-4.5V2M8 22v-4.5L12 13l4 4.5V22" />', 't' => __('landing.problem_1_title'), 'd' => __('landing.problem_1_desc'), 'f' => __('landing.problem_1_tag')],
                 ['icon' => '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />', 't' => __('landing.problem_2_title'), 'd' => __('landing.problem_2_desc'), 'f' => __('landing.problem_2_tag')],
                 ['icon' => '<path d="M3 17l6-6 4 4 8-8" /><path d="M21 13V7h-6" />', 't' => __('landing.problem_3_title'), 'd' => __('landing.problem_3_desc'), 'f' => __('landing.problem_3_tag')],
             ] as $c)
@@ -161,16 +161,20 @@
         </div>
         <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ([
-                ['icon' => '<circle cx="12" cy="12" r="9" /><path d="M12 8v5m0 3h.01" />', 't' => __('landing.f_ai_title'), 'd' => __('landing.f_ai_desc')],
-                ['icon' => '<path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 0 0-4-5.7V5a2 2 0 1 0-4 0v.3A6 6 0 0 0 6 11v3.2a2 2 0 0 1-.6 1.4L4 17h5" /><path d="M10 21a2 2 0 0 0 4 0" />', 't' => __('landing.f_alert_title'), 'd' => __('landing.f_alert_desc')],
-                ['icon' => '<path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" />', 't' => __('landing.f_insight_title'), 'd' => __('landing.f_insight_desc')],
-                ['icon' => '<rect x="3" y="4" width="18" height="14" rx="2" /><path d="M3 9h18M8 21h8" />', 't' => __('landing.f_multi_title'), 'd' => __('landing.f_multi_desc')],
-                ['icon' => '<path d="M3 17l6-6 4 4 8-8" /><path d="M21 13V7h-6" />', 't' => __('landing.f_pred_title'), 'd' => __('landing.f_pred_desc')],
-                ['icon' => '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2" />', 't' => __('landing.f_chart_title'), 'd' => __('landing.f_chart_desc')],
+                ['img' => 'images/icon-ai.png', 'icon' => '', 't' => __('landing.f_ai_title'), 'd' => __('landing.f_ai_desc')],
+                ['icon' => '<path d="M12 5a5.5 5.5 0 0 0-5.5 5.5V14l-2 2.5h15L17.5 14v-3.5A5.5 5.5 0 0 0 12 5Z" /><path d="M10 19.5a2 2 0 0 0 4 0" /><path d="M4 10a7 7 0 0 0-.8 3M20 10a7 7 0 0 1 .8 3" />', 't' => __('landing.f_alert_title'), 'd' => __('landing.f_alert_desc')],
+                ['icon' => '<path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.8.6 1.5 1.4 1.5 2.1h4c0-.7.7-1.5 1.5-2.1A6 6 0 0 0 12 3Z" />', 't' => __('landing.f_insight_title'), 'd' => __('landing.f_insight_desc')],
+                ['icon' => '<path d="M3 9.5 12 4l9 5.5" /><path d="M5 8.5V20h14V8.5" /><path d="M9 20v-6h6v6" />', 't' => __('landing.f_multi_title'), 'd' => __('landing.f_multi_desc')],
+                ['img' => 'images/prediksiml.png', 'icon' => '', 't' => __('landing.f_pred_title'), 'd' => __('landing.f_pred_desc')],
+                ['icon' => '<path d="M3 16l4-5 3 3 5-6 4 3" />', 't' => __('landing.f_chart_title'), 'd' => __('landing.f_chart_desc')],
             ] as $f)
                 <div class="flex gap-4 rounded-3xl border border-black/5 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(30,58,26,0.4)]">
                     <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#e9f1dc] text-[#2f5d2a]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $f['icon'] !!}</svg>
+                        @if (!empty($f['img']))
+                            <img src="{{ asset($f['img']) }}" alt="" class="h-6 w-6 object-contain" />
+                        @else
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $f['icon'] !!}</svg>
+                        @endif
                     </span>
                     <span>
                         <span class="block font-display text-[15px] font-extrabold text-[#1e3a1a]">{{ $f['t'] }}</span>
@@ -264,13 +268,17 @@
                 ['t' => 'ESP32', 'd' => 'MQ-2 • MQ-3 • MQ-135', 'n' => '01', 'icon' => '<rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" />'],
                 ['t' => 'Laravel', 'd' => 'REST API • MySQL', 'n' => '02', 'icon' => '<rect x="3" y="4" width="18" height="6" rx="1.5" /><rect x="3" y="14" width="18" height="6" rx="1.5" /><path d="M7 7h.01M7 17h.01" />'],
                 ['t' => 'FastAPI', 'd' => 'Python ML service :8001', 'n' => '03', 'icon' => '<path d="M13 10V3L4 14h7v7l9-11h-7z" />'],
-                ['t' => 'SVM', 'd' => 'Support Vector Machine', 'n' => '04', 'icon' => '<circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" />'],
+                ['t' => 'SVM', 'd' => 'Support Vector Machine', 'n' => '04', 'img' => 'images/svm.png', 'icon' => ''],
             ] as $i => $t)
                 <div class="flex items-stretch gap-2">
                     <div class="relative flex-1 rounded-3xl border border-black/5 bg-white p-6 text-center shadow-[0_10px_30px_-18px_rgba(30,58,26,0.4)]">
                         <span class="absolute right-4 top-4 font-mono text-[10px] font-bold text-gray-300">{{ $t['n'] }}</span>
                         <span class="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-[#e9f1dc] text-[#2f5d2a]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $t['icon'] !!}</svg>
+                            @if (!empty($t['img']))
+                                <img src="{{ asset($t['img']) }}" alt="" class="h-6 w-6 object-contain" />
+                            @else
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $t['icon'] !!}</svg>
+                            @endif
                         </span>
                         <p class="mt-3 font-display text-[15px] font-extrabold text-[#1e3a1a]">{{ $t['t'] }}</p>
                         <p class="mt-1 font-mono text-[11px] text-gray-400">{{ $t['d'] }}</p>

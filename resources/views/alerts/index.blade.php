@@ -41,7 +41,7 @@
                             @endunless
                         </p>
                         <p class="mt-0.5 text-sm text-gray-600">{{ $alert->body() }}</p>
-                        <p class="mt-1 font-mono text-xs text-gray-400">{{ $alert->device?->device_id }} • {{ $alert->created_at->translatedFormat('d M Y H:i') }}</p>
+                        <p class="mt-1 break-all font-mono text-xs text-gray-400">{{ $alert->device?->device_id }} • {{ $alert->created_at->translatedFormat('d M Y H:i') }}</p>
                     </div>
                     @unless ($alert->isRead())
                         <form method="POST" action="{{ route('alerts.read', $alert) }}" class="shrink-0">
