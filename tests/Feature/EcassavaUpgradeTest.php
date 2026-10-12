@@ -20,7 +20,7 @@ class EcassavaUpgradeTest extends TestCase
 
     public function test_guest_sees_landing_page_and_login_redirects_to_dashboard(): void
     {
-        $this->get('/')->assertStatus(200)->assertSee(__('landing.hero_title'));
+        $this->get('/')->assertStatus(200)->assertSee('Kenapa kesegaran', false)->assertSee('sulit ditebak?', false);
 
         $user = User::factory()->create();
 
@@ -249,9 +249,9 @@ class EcassavaUpgradeTest extends TestCase
         $response->assertRedirect();
         $response->assertCookie('locale', 'en');
 
-        $this->get('/')->assertSee('Detect cassava freshness');
+        $this->get('/')->assertSee('Detect Cassava Freshness');
 
         $this->get('/lang/id')->assertCookie('locale', 'id');
-        $this->get('/')->assertSee('Deteksi kesegaran singkong');
+        $this->get('/')->assertSee('Deteksi Kesegaran Singkong');
     }
 }
