@@ -66,7 +66,7 @@
     }
 
     body {
-        @apply overflow-x-clip bg-[#f7fbf4] text-gray-800 antialiased;
+        @apply overflow-x-clip bg-white text-gray-800 antialiased;
         font-feature-settings: 'cv11', 'ss01';
         text-rendering: optimizeLegibility;
     }

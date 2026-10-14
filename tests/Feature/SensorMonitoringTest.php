@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Device;
-use App\Models\MeasurementSession;
 use App\Models\SensorReading;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -178,55 +177,5 @@ class SensorMonitoringTest extends TestCase
             'links',
             'meta',
         ]);
-    }
-
-    public function test_can_start_and_end_measurement_session(): void
-    {
-        $user = User::factory()->create();
-        $device = Device::factory()->for($user)->create(['device_id' => 'ECASSAVA-001']);
-
-        // Start session
-        $response = $this->actingAs($user)->post('/sessions', [
-            'device_id' => 'ECASSAVA-001',
-            'name' => 'Uji Singkong Segar Hari 1',
-            'cassava_condition' => 'fresh',
-            'notes' => 'Singkong baru dipanen',
-        ]);
-
-        $response->assertRedirect(route('sessions.index'));
-
-        $session = MeasurementSession::where('name', 'Uji Singkong Segar Hari 1')->first();
-        $this->assertNotNull($session);
-        $this->assertTrue($session->isActive());
-
-        // End session
-        $endResponse = $this->actingAs($user)->patch("/sessions/{$session->id}/end");
-        $endResponse->assertRedirect(route('sessions.index'));
-
-        $session->refresh();
-        $this->assertFalse($session->isActive());
-    }
-
-    public function test_csv_export_streams_training_data(): void
-    {
-        $user = User::factory()->create();
-        $device = Device::factory()->for($user)->create(['device_id' => 'ECASSAVA-001']);
-        $session = MeasurementSession::create([
-            'device_id' => $device->id,
-            'name' => 'Test Batch',
-            'cassava_condition' => 'fresh',
-            'started_at' => now()->subHour(),
-            'ended_at' => now(),
-        ]);
-
-        SensorReading::factory()->count(5)->create([
-            'device_id' => $device->id,
-            'measurement_session_id' => $session->id,
-        ]);
-
-        $response = $this->actingAs($user)->get('/sessions/export-csv');
-
-        $response->assertStatus(200);
-        $this->assertStringContainsString('text/csv', (string) $response->headers->get('content-type'));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'login_title' => 'Masuk ke E-CASSAVA',
+    'login_title' => 'Masuk Sekarang',
     'login_subtitle' => 'Pantau gudang singkongmu secara real-time.',
     'register_title' => 'Buat akun gratis',
     'register_subtitle' => 'Gratis untuk 2 gudang pertama.',

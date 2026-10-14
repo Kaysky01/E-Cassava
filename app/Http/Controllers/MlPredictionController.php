@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
-use App\Models\MeasurementSession;
 use App\Models\Prediction;
 use App\Models\SensorReading;
 use App\Services\MlPredictionService;
@@ -27,11 +26,11 @@ class MlPredictionController extends Controller
         $windowSize = (int) config('ecassava.ml_window_size', 30);
 
         $latestPrediction = Prediction::whereHas('device', fn ($q) => $q->where('user_id', $userId))
-            ->with(['device', 'measurementSession'])
+            ->with('device')
             ->latest('predicted_at')
             ->first();
         $predictionHistory = Prediction::whereHas('device', fn ($q) => $q->where('user_id', $userId))
-            ->with(['device', 'measurementSession'])
+            ->with('device')
             ->latest('predicted_at')
             ->paginate(15);
 
@@ -106,35 +105,6 @@ class MlPredictionController extends Controller
         return response()->json(array_merge($result, [
             'features' => $features,
             'reading_count' => count($mq2s),
-        ]));
-    }
-
-    /**
-     * Prediksi berdasarkan data sesi yang sudah lengkap.
-     *
-     * POST /ml/predict-session/{session}
-     */
-    public function predictSession(MeasurementSession $session): JsonResponse
-    {
-        $this->authorize('view', $session);
-
-        $features = $session->computeFeatures();
-
-        if ($features['reading_count'] < 5) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Sesi ini belum memiliki cukup data.',
-            ], 422);
-        }
-
-        $result = $this->mlService->predict($features);
-
-        return response()->json(array_merge($result, [
-            'features' => $features,
-            'session_id' => $session->id,
-            'session_name' => $session->name,
-            'actual_label' => $session->cassava_condition?->value,
-            'actual_label_id' => $session->cassava_condition?->label(),
         ]));
     }
 

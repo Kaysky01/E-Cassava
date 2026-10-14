@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'login_title' => 'Log in to E-CASSAVA',
+    'login_title' => 'Login Now',
     'login_subtitle' => 'Monitor your cassava warehouses in real time.',
     'register_title' => 'Create a free account',
     'register_subtitle' => 'Free for your first 2 warehouses.',

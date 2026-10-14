@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Jobs\ClassifySensorWindowJob;
 use App\Models\Alert;
 use App\Models\Device;
-use App\Models\MeasurementSession;
 use App\Models\SensorReading;
 use App\Models\User;
 use App\Services\AlertService;
@@ -20,7 +19,7 @@ class EcassavaUpgradeTest extends TestCase
 
     public function test_guest_sees_landing_page_and_login_redirects_to_dashboard(): void
     {
-        $this->get('/')->assertStatus(200)->assertSee(__('landing.hero_title'));
+        $this->get('/')->assertStatus(200)->assertSee('Kenapa kesegaran', false)->assertSee('sulit ditebak?', false);
 
         $user = User::factory()->create();
 
@@ -48,7 +47,6 @@ class EcassavaUpgradeTest extends TestCase
     {
         $this->get('/dashboard')->assertRedirect(route('login'));
         $this->get('/devices')->assertRedirect(route('login'));
-        $this->get('/sessions')->assertRedirect(route('login'));
         $this->get('/ml')->assertRedirect(route('login'));
         $this->get('/alerts')->assertRedirect(route('login'));
     }
@@ -59,12 +57,6 @@ class EcassavaUpgradeTest extends TestCase
         $userB = User::factory()->create();
 
         $deviceB = Device::factory()->for($userB)->create(['device_id' => 'ECASSAVA-090']);
-        $sessionB = MeasurementSession::create([
-            'device_id' => $deviceB->id,
-            'name' => 'Milik B',
-            'cassava_condition' => 'fresh',
-            'started_at' => now()->subHour(),
-        ]);
 
         // Device milik B: A ditolak (403, policy).
         $this->actingAs($userA)->get("/devices/{$deviceB->id}/edit")->assertForbidden();
@@ -72,10 +64,6 @@ class EcassavaUpgradeTest extends TestCase
             'name' => 'Coba ambil',
         ])->assertForbidden();
         $this->actingAs($userA)->delete("/devices/{$deviceB->id}")->assertForbidden();
-
-        // Sesi milik B tidak bisa dibuka/diakhiri A.
-        $this->actingAs($userA)->get("/sessions/{$sessionB->id}")->assertForbidden();
-        $this->actingAs($userA)->patch("/sessions/{$sessionB->id}/end")->assertForbidden();
 
         // Prediksi manual untuk device B via A → 404.
         $this->actingAs($userA)->postJson('/ml/predict', ['device_id' => 'ECASSAVA-090'])
@@ -249,9 +237,9 @@ class EcassavaUpgradeTest extends TestCase
         $response->assertRedirect();
         $response->assertCookie('locale', 'en');
 
-        $this->get('/')->assertSee('Detect cassava freshness');
+        $this->get('/')->assertSee('Detect Cassava Freshness');
 
         $this->get('/lang/id')->assertCookie('locale', 'id');
-        $this->get('/')->assertSee('Deteksi kesegaran singkong');
+        $this->get('/')->assertSee('Deteksi Kesegaran Singkong');
     }
 }

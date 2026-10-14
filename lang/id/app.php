@@ -8,7 +8,6 @@ return [
     'nav_demo' => 'Demo',
     'nav_dashboard' => 'Dashboard',
     'nav_devices' => 'Alat',
-    'nav_sessions' => 'Sesi Uji',
     'nav_ml' => 'Prediksi ML',
     'nav_alerts' => 'Notifikasi',
     'login' => 'Masuk',
